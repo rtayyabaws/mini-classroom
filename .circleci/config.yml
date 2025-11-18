@@ -36,6 +36,7 @@ jobs:
       - run:
           name: Upload to s3 dev bucket
           command: |
+            apt-get install awscli
             aws s3 cp backend/build/info.txt s3://mini-classroom-dev/info.txt
 
 workflows:
