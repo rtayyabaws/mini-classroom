@@ -12,7 +12,7 @@ jobs:
             cd backend
             npm Install
       - run:
-          name: Run a simple test
+          name: Run a simple test and
           command: |
             cd backend
             node -e "console.log('Backend build works')"
