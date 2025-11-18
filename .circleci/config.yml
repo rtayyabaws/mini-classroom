@@ -18,10 +18,30 @@ jobs:
             node -e "console.log('Backend build works')"
 
 
+
+
+        
+  
+  deploy_dev:
+     docker:
+       - image: cimg/base:stable
+     steps:
+      - checkout
+      - run:
+          name: create build artifact
+          command: |
+            cd backend
+            mkdir -p build
+            echo "Build created at $(date)" > build/info.txt
+      - run:
+          name: Upload to s3 dev bucket
+          command: |
+            aws s3 cp backend/build/info.txt s3://mini-classroom-dev/info.txt
+
 workflows:
   build_and_test:
     jobs:
       - build
-
-        
-  
+      - deploy_dev:
+          requires:
+            - build
