@@ -1,0 +1,21 @@
+service: mini-classroom-backend
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+
+functions:
+  app:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: ANY
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
