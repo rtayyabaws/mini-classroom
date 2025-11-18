@@ -1,0 +1,27 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.17
+    steps:
+      - checkout
+      - run:
+          name: Install backend dependencies
+          command: |
+            cd backend
+            npm Install
+      - run:
+          name: Run a simple test
+          command: |
+            cd backend
+            node -e "console.log('Backend build works')"
+
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+
+        
+  
