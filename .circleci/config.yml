@@ -10,7 +10,7 @@ jobs:
           name: Install backend dependencies
           command: |
             cd backend
-            npm Install
+            npm install
       - run:
           name: Run a simple test and
           command: |
