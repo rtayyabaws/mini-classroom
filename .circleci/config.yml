@@ -28,6 +28,11 @@ jobs:
      steps:
       - checkout
       - run:
+          name: Install AWS CLI
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y awscli
+      - run:
           name: create build artifact
           command: |
             cd backend
@@ -35,8 +40,7 @@ jobs:
             echo "Build created at $(date)" > build/info.txt
       - run:
           name: Upload to s3 dev bucket
-          command: |
-            apt-get install awscli
+          command: |            
             aws s3 cp backend/build/info.txt s3://mini-classroom-dev/info.txt
 
 workflows:
